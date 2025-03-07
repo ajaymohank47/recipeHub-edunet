@@ -19,7 +19,7 @@ function Home() {
   // Fetch all recipes
   const fetchAllRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/recipes");
+      const response = await fetch("https://recipehub-backend-cx3k.onrender.com/api/recipes");
       if (!response.ok) {
         throw new Error("Failed to fetch recipes");
       }
