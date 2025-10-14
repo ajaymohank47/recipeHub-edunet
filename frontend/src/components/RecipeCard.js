@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Make sure this is imported
+import { useNavigate } from "react-router-dom";
+
+// Utility function to truncate text
+const truncateText = (text, maxLength = 120) => {
+  if (!text) return "No description available";
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).trim() + "...";
+};
 
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate(); // Initialize navigate function here
@@ -28,6 +35,7 @@ const RecipeCard = ({ recipe }) => {
 const styles = {
   card: {
     width: "350px",
+    height: "420px", // Fixed height for all cards
     backgroundColor: "#fff",
     borderRadius: "15px",
     boxShadow: "0px 10px 20px rgb(255, 119, 0)", 
@@ -37,6 +45,8 @@ const styles = {
     textAlign: "center",
     position: "relative",
     margin: "20px",
+    display: "flex",
+    flexDirection: "column",
   },
   imageContainer: {
     width: "100%",
@@ -45,6 +55,7 @@ const styles = {
     borderTopRightRadius: "15px",
     overflow: "hidden",
     position: "relative",
+    flexShrink: 0, // Prevent image from shrinking
   },
   image: {
     width: "100%",
@@ -57,6 +68,10 @@ const styles = {
     backgroundColor: "#fff",
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
+    display: "flex",
+    flexDirection: "column",
+    flex: 1, // Take remaining space
+    justifyContent: "space-between",
   },
   title: {
     fontSize: "22px",
@@ -65,15 +80,27 @@ const styles = {
     marginBottom: "10px",
     letterSpacing: "0.5px",
     transition: "color 0.3s ease",
+    lineHeight: "1.2",
+    height: "52px", // Fixed height for 2 lines
+    overflow: "hidden",
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
   },
   description: {
     fontSize: "14px",
     color: "#666",
     lineHeight: "1.5",
     marginBottom: "20px",
+    flex: 1, // Take available space
+    overflow: "hidden",
+    display: "-webkit-box",
+    WebkitLineClamp: 3, // Limit to 3 lines
+    WebkitBoxOrient: "vertical",
+    textOverflow: "ellipsis",
   },
   cardFooter: {
-    marginTop: "10px",
+    marginTop: "auto", // Push to bottom
   },
   viewButton: {
     padding: "8px 15px",
@@ -84,6 +111,7 @@ const styles = {
     fontWeight: "bold",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
+    display: "inline-block",
   },
 
   // Hover Effects
@@ -130,7 +158,9 @@ const RecipeCardWithHover = ({ recipe }) => {
         <h3 style={{ ...styles.title, ...(isHovered && styles.titleHover) }}>
           {recipe.name}
         </h3>
-        <p style={styles.description}>{recipe.description}</p>
+        <p style={styles.description}>
+          {truncateText(recipe.description, 120)}
+        </p>
         <div style={styles.cardFooter}>
           <span
             style={{
