@@ -23,7 +23,7 @@ const Dashboard = () => {
       setIsLoading(true);
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/recipes/user/recipes`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://recipehub-backend-cx3k.onrender.com'}/api/recipes/user/recipes`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ const Dashboard = () => {
     setDeletingId(id);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/recipes/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://recipehub-backend-cx3k.onrender.com'}/api/recipes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

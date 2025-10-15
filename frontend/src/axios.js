@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api`,
+  baseURL: `${process.env.REACT_APP_API_URL || 'https://recipehub-backend-cx3k.onrender.com'}/api`,
 });
 
 // Automatically attach token
@@ -30,7 +30,7 @@ API.interceptors.response.use(
         }
 
         // Request a new token
-        const res = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/auth/refresh`, { token: refreshToken });
+        const res = await axios.post(`${process.env.REACT_APP_API_URL || 'https://recipehub-backend-cx3k.onrender.com'}/api/auth/refresh`, { token: refreshToken });
         localStorage.setItem("token", res.data.token);
 
         // Retry the original request with the new token

@@ -8,7 +8,7 @@ function RecipeDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/recipes/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL || 'https://recipehub-backend-cx3k.onrender.com'}/api/recipes/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setRecipe(data);
